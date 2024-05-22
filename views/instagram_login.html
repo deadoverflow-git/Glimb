@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login to Instagram</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Ensure this CSS is included in the same file and is consistent with the previous styles */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: #1e1e1e;
+    border-radius: 8px;
+    padding: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.form-container {
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+input {
+    width: calc(100% - 20px);
+    padding: 12px 10px;
+    margin-top: 20px;
+    background-color: #333;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    border-color: #0077ff;
+    outline: none;
+}
+
+button.btn-login {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    background-color: #0077ff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button.btn-login:hover {
+    background-color: #0056b3;
+}
+
+h1 {
+    font-weight: 500;
+    font-size: 22px;
+}
+
+p {
+    font-weight: 300;
+    font-size: 16px;
+}
+
+#message {
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1>Instagram Login</h1>
+            <p>Sign in to connect your Instagram account with Glimb.</p>
+            <form id="instagramLoginForm">
+                <input type="text" id="username" name="username" placeholder="Username" required>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+                <button type="submit" class="btn-login">Log In</button>
+            </form>
+            <div id="message"></div>
+        </div>
+    </div>
+    <script>
+        const { ipcRenderer } = require('electron');
+        document.getElementById('instagramLoginForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const message = document.getElementById('message');
+    ipcRenderer.send('login', `${username}|${password}`);
+    if (username.trim() === '' || password.trim() === '') {
+        message.textContent = 'Please enter both username and password.';
+        message.style.color = 'red';
+    } else {
+        message.textContent = 'Login Failed';
+        message.style.color = 'red';
+        // Implement additional login logic here
+    }
+});
+
+    </script>
+</body>
+</html>

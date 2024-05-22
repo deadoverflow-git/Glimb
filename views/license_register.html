@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glimb License Registration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: #1e1e1e;
+    border-radius: 8px;
+    padding: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.form-container {
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+input {
+    width: calc(100% - 20px);
+    padding: 12px 10px;
+    margin-top: 20px;
+    background-color: #333;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    border-color: #0077ff;
+    outline: none;
+}
+
+button.btn-register {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    background-color: #0077ff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button.btn-register:hover {
+    background-color: #0056b3;
+}
+
+h1 {
+    font-weight: 500;
+    font-size: 22px;
+}
+
+p {
+    font-weight: 300;
+    font-size: 16px;
+}
+
+#message {
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1>Activate Your Glimb License</h1>
+            <p>Enter your product license key below to unlock all features.</p>
+            <form id="licenseForm">
+                <input type="text" id="licenseKey" name="licenseKey" placeholder="License Key" required>
+                <button type="submit" class="btn-register">Activate License</button>
+            </form>
+            <div id="message"></div>
+        </div>
+    </div>
+    <script>
+    const { ipcRenderer } = require('electron');
+        
+        document.getElementById('licenseForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const licenseKey = document.getElementById('licenseKey').value;
+    const message = document.getElementById('message');
+    if (licenseKey.trim() === '') {
+        message.textContent = 'License key is required.';
+        message.style.color = 'red';
+    } else {
+        ipcRenderer.send('licence', licenseKey);
+        message.textContent = 'License activated successfully!';
+        message.style.color = 'green';
+    }
+});
+
+    </script>
+</body>
+</html>
