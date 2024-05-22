@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "fetch": "^1.1.0",
+    "form-data": "^4.0.0",
+    "fs": "^0.0.1-security",
+    "image-size": "^1.1.1",
+    "node-fetch": "^2.0",
+    "ps": "^1.0.0",
+    "request": "^2.88.2",
+    "sqlite3": "^5.1.7",
+    "tweetnacl": "^1.0.3",
+    "tweetnacl-sealedbox-js": "^1.2.0",
+    "tweetnacl-util": "^0.15.1"
+  }
+}
